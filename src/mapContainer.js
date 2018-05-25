@@ -1,5 +1,6 @@
 import DeckGL, { LineLayer } from "deck.gl";
 import React, { Component } from "react";
+import MapGL from "react-map-gl";
 
 const viewport = {
   width: 500,
@@ -18,15 +19,20 @@ const data = [
   }
 ];
 
+const MAPBOX_ACCESS_TOKEN =
+  "pk.eyJ1Ijoiam9obmR1bjg5IiwiYSI6ImNqaG0xa2NzdDBmd3ozZHMxa2NzYW9pOTUifQ.bwlBFOMZKolwnsdBNF4KUA";
+
 class MapContainer extends Component {
   render() {
     return (
       <div className="MapContainer">
         <p>I am a map</p>
-        <DeckGL
-          {...viewport}
-          layers={[new LineLayer({ id: "line-layer", data })]}
-        />
+        <MapGL {...viewport} mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}>
+          <DeckGL
+            {...viewport}
+            layers={[new LineLayer({ id: "line-layer", data })]}
+          />
+        </MapGL>
       </div>
     );
   }
